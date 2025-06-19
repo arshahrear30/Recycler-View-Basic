@@ -16,9 +16,14 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
+    HashMap<String,String>hashMap;
+    ArrayList<HashMap<String,String>>arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +33,33 @@ public class MainActivity extends AppCompatActivity {
         // ListView এডাপ্টার খায় .. রিসাইকেল ভিউ তেমনি এডাপটার খায় কিন্তু এটা একটু অন্য ধরনের
         recyclerView =findViewById(R.id.recyclerView);
 
+        arrayList = new ArrayList<>();
+
+        hashMap = new HashMap<>();
+        hashMap.put("video_id", "tL5eNq2k78E");
+        hashMap.put("title", "Nasheed - Нашид (Sabeelu dummu)");
+        arrayList.add(hashMap);
+
+        hashMap = new HashMap<>();
+        hashMap.put("video_id", "9s-M8p3aUwI");
+        hashMap.put("title", "Нашид - Ахи Анта Хуррун | Ahi Anta Hurrun slowed-reverb");
+        arrayList.add(hashMap);
+
+        hashMap = new HashMap<>();
+        hashMap.put("video_id", "1ZAPyPq4T6w");
+        hashMap.put("title", "Video 3");
+        arrayList.add(hashMap);
+
+        hashMap = new HashMap<>();
+        hashMap.put("video_id", "VbqIkqKo0QU");
+        hashMap.put("title", "This is video 4");
+        arrayList.add(hashMap);
+
         Myadapter adapter=new Myadapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
-//Main activity open
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -75,13 +102,18 @@ public class MainActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
             //data input এর জন্য onBindViewHolder use করবো
 
-            holder.textView.setText("Item Position:"+position);
+            hashMap = arrayList.get(position);
+            String title = hashMap.get("title");
+            String video_id = hashMap.get("video_id");
+            String imageUrl = "https://img.youtube.com/vi/"+video_id+"/0.jpg";
+
+            holder.textView.setText(title);
 
         }
 
         @Override
         public int getItemCount() {
-            return 10; // loop কতবার চলবে return এ set করবো
+            return arrayList.size(); // loop কতবার চলবে return এ set করবো
         }
 
 
