@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        // ListView এডাপ্টার খায় .. রিসাইকেল ভিউ তেমনি এডাপটার খায় কিন্তু এটা একটু অন্য ধরনের
+        // ListView এডাপ্টার খায় .. রিসাইকেল ভিউ তেমনি এডাপটার খায় কিন্তু এটা একটু অন্য ধরনের view holder দিয়ে কাজ করে
         recyclerView =findViewById(R.id.recyclerView);
 
         arrayList = new ArrayList<>();
